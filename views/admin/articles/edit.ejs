@@ -1,0 +1,69 @@
+<%- include('../../partials/header.ejs') %>
+
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+    
+    <div class="container">
+        
+        <hr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Edit Article</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/articles/update">
+                    <input type="hidden" value="<%= article.id %>" name="id">
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="title"
+                        placeholder="Set the new article title"
+                    />
+                    <hr />
+                    <textarea
+                        name="body"
+                        class="form-control"
+                        placeholder="Write your article here"
+                        id="article"
+                    ></textarea>
+                    <label> Category </label>
+                    <select name="category" class="form-control">
+                        <% categories.forEach(categories => {%>
+                            <% if(categories.id == article.categoryId){%>
+                                <option value="<%= categories.id %>" selected><%= categories.title %></option>
+                            <% } else { %>
+                                <option value="<%= categories.id %>"><%= categories.title %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
+                    <br>
+                    <button class="btn btn-dark"> Update </button>
+                </form>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div id="content" style="display: none;">
+        <%- article.body %>
+    </div>
+
+</body>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+
+    tinymce.init({
+        selector: "#article",
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ],
+        init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html())
+        }
+    })
+
+</script>
+
+
+<%- include('../../partials/footer.ejs') %>

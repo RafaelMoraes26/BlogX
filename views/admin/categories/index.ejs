@@ -1,0 +1,60 @@
+<%- include('../../partials/header.ejs') %>
+
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+    
+    <div class="container">
+        <hr>
+        <h2>Categories</h2>
+        <a href="/admin/categories/new" class="btn btn-dark"> Create new Categorie</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Slug</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(category => { %>
+                    <tr>
+                        <th><%= category.id %></th>
+                        <th><%= category.title %></th>
+                        <th><%= category.slug %></th>
+                        <th>
+                            <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning"> Edit </a>
+                            <form 
+                                method="POST" 
+                                action="/categories/delete" 
+                                onsubmit="confirmDelete(event, this)" 
+                                style="display: inline"
+                            >
+                                <input 
+                                    name="id" 
+                                    type="hidden" 
+                                    value="<%= category.id %>"
+                                >
+                                <button class="btn btn-danger"> Delete </button>
+                            </form>      
+                        </th>
+                    </tr>   
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        const decision = confirm('Do you really wanna delete this categorie?');
+        
+        decision && form.submit();
+    }
+</script>
+
+
+<%- include('../../partials/footer.ejs') %>

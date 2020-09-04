@@ -1,0 +1,33 @@
+<%- include ('partials/header.ejs') %>
+<%- include('partials/homenavbar.ejs') %>
+<body>
+    
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to the Blog X!</h1>
+            <p class="lead">This is a simple blog that I made to test my skills! In this project I made a CRUD using NodeJS, EJS, MySQL and Bootstrap!</p>
+            <hr class="my-4">
+            <p> I made this blog while watching a course on udemy that taught some NodeJS concepts. Hope you like :) </p>
+        </div>
+        <hr>
+        <% articles.forEach( article => {%>
+            <div class="card">
+                <div class="card-body">
+                    <a href="/<%= article.slug %>" style="color: inherit;"> <h3> <%= article.title %> </h3> </a>
+                </div>
+                <br>
+            </div>
+            <br>
+        <% }) %>
+        <hr>    
+        <div class="row">
+            <div class="col col-12">
+                <a href="/articles/page/1" style="float: right;">Next >></a>
+            </div>
+        </div>
+        <hr>
+    </div>
+    
+</body>
+
+<%- include ('partials/footer.ejs') %>

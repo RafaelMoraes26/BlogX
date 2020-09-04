@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark"">
+    
+    <a href="/" class="navbar-brand">
+        Blog X
+    </a>
+
+    <ul class="navbar-nav mr-auto">
+
+        <% categories.forEach(category => {%> 
+            <li class="nav-item">
+                <a class="nav-link" href="/category/<%= category.slug %>"><%= category.title %></a>
+            </li>
+        <% }) %>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/admin/login" class="nav-link"> Login </a>
+            </li>
+    </ul>
+</nav>
